@@ -11,7 +11,7 @@ $object = new Appointment;
 include('header.php');
 
 ?>
-
+<br><br><br><br><br>
 <div class="container-fluid">
 	<?php
 	include('navbar.php');

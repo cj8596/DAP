@@ -292,6 +292,7 @@ if(isset($_POST["action"]))
 	if($_POST['action'] == 'edit_history')
 	{
 		$data = array(
+			':patient_id'				=>  $_SESSION['patient_id'],
 			':patient_height'			=>	$_POST["patient_height"],
 			':patient_weight'			=>	$_POST["patient_weight"],
 			':patient_medication'		=>	$_POST["patient_medication"],
@@ -300,22 +301,23 @@ if(isset($_POST["action"]))
 			':history_modified_on'		=>	now()
 		);
 		$rs->query = "SELECT * FROM patient_history WHERE patient_id='".$_SESSION["patient_id"]."'";
-		$patient_history = $rs->get_result();
-		if(mysqli_num_rows($patient_history)==1){
+		//$patient_history = $rs->get_result();
+		if($rs->row_count() > 0)
+		{
 			$object->query = "
 				UPDATE patient_history  
 				SET patient_height = :patient_height, 
 				patient_weight = :patient_weight, 
 				patient_medication = :patient_medication, 
 				patient_history = :patient_history, 
-				history_modified_on = :history_modified_on,  
+				history_modified_on = :history_modified_on  
 				WHERE patient_id = '".$_SESSION['patient_id']."'
 				";
 		}else{
 			$object->query="
 				INSERT INTO patient_history
 				(patient_id, patient_height, patient_weight, patient_medication, patient_history, history_added_on, history_modified_on)
-				VALUES('".$_SESSION['patient_id']."', :patient_height, :patient_weight, :patient_medication, :patient_history, :history_added_on, :history_modified_on)
+				VALUES(:patient_id, :patient_height, :patient_weight, :patient_medication, :patient_history, :history_added_on, :history_modified_on)
 				";
 		}
 		$object->execute($data);

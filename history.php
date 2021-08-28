@@ -1,6 +1,5 @@
 <?php
 include('class/Appointment.php');
-global $connection;
 
 $object1 = new Appointment;
 $object1->query = "
@@ -11,7 +10,7 @@ $result1 = $object1->get_result();
 include('header.php');
 
 ?>
-
+<br><br><br><br><br>	
 <div class="container-fluid">
 	<?php include('navbar.php'); ?>
 
@@ -71,7 +70,6 @@ include('header.php');
 			}
 			else
 			{
-
 				if(isset($_SESSION['success_message']))
 				{
 					echo $_SESSION['success_message'];
@@ -173,6 +171,9 @@ $('#patient_history').val("<?php echo $rows['patient_history']; ?>");
 				success:function(data)
 				{
 					window.location.href = "history.php";
+				},
+				error:function(data){
+					window.location.href = "history.php?action=edit"
 				}
 			})
 		}

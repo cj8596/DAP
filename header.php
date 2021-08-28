@@ -27,7 +27,7 @@
 	    </style>
 	</head>
 	<body>
-		<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+		<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow fixed-top">
 			<div class="col">
 		    	<img src="images/logo.jpg"  alt="doctor-patient" />
 		    </div>
